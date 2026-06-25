@@ -1,0 +1,15 @@
+app/
+gradle/
+.gradle/
+.idea/
+build/
+*.iml
+gradlew
+gradlew.bat
+local.properties
+uploads/
+set_secrets.bat
+ngrok.exe
+ngrok-v3-stable-windows-amd64.zip
+OfficeSetup.exe
+*.apk

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Zi" android:textSize="12sp" android:textColor="@color/text_secondary"
+            android:layout_marginBottom="4dp" />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" app:cardCornerRadius="8dp" app:cardElevation="0dp"
+            app:strokeWidth="1dp" app:strokeColor="@color/divider_color">
+            <Spinner android:id="@+id/spinnerDayOfWeek"
+                android:layout_width="match_parent" android:layout_height="48dp" android:paddingStart="8dp" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:hint="Ora Inceput (ex: 08:00)"
+            app:startIconDrawable="@drawable/ic_calendar">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etScheduleStart"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:inputType="time" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Ora Sfarsit (ex: 17:00)"
+            app:startIconDrawable="@drawable/ic_calendar">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etScheduleEnd"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:inputType="time" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+</ScrollView>

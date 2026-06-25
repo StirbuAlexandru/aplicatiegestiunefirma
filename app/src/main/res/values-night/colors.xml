@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- In dark mode, "white" used as card background becomes dark surface -->
+    <color name="white">#1E293B</color>
+
+    <!-- Surfaces -->
+    <color name="bg_premium">#0F172A</color>
+    <color name="bg_surface">#1E293B</color>
+    <color name="bg_elevated">#334155</color>
+
+    <!-- Text -->
+    <color name="text_main">#F1F5F9</color>
+    <color name="text_secondary">#94A3B8</color>
+    <color name="text_hint">#64748B</color>
+
+    <!-- Borders -->
+    <color name="divider_color">#334155</color>
+    <color name="border_subtle">#1E293B</color>
+
+    <!-- Primary surface tint (dark) -->
+    <color name="primary_surface">#1E1B4B</color>
+
+    <!-- Soft card tints (dark variants) -->
+    <color name="card_blue">#1E1B4B</color>
+    <color name="card_green">#064E3B</color>
+    <color name="card_orange">#431407</color>
+    <color name="card_purple">#2E1065</color>
+    <color name="card_rose">#4C0519</color>
+</resources>

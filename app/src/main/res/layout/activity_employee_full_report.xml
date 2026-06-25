@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_premium">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:background="@drawable/bg_gradient_header" android:orientation="horizontal"
+        android:gravity="center_vertical" android:paddingHorizontal="16dp"
+        android:paddingTop="48dp" android:paddingBottom="20dp">
+        <ImageView android:id="@+id/btnBack" android:layout_width="36dp" android:layout_height="36dp"
+            android:src="@drawable/ic_chevron_right" android:rotation="180" app:tint="@color/white" android:padding="4dp" />
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:layout_marginStart="12dp"
+            android:text="Fisa Completa Angajat" android:textColor="@color/white"
+            android:textSize="22sp" android:fontFamily="sans-serif-medium" />
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+        android:gravity="center" android:orientation="vertical" android:padding="32dp">
+
+        <ImageView android:layout_width="80dp" android:layout_height="80dp"
+            android:src="@drawable/ic_person" app:tint="@color/primary_blue"
+            android:layout_marginBottom="24dp" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Genereaza o fisa PDF cu toate rapoartele angajatului pentru o perioada selectata."
+            android:textColor="@color/text_secondary" android:textSize="15sp"
+            android:gravity="center" android:layout_marginBottom="32dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGenerateReport"
+            style="@style/ModernButton"
+            android:layout_width="match_parent" android:layout_height="56dp"
+            android:text="Selecteaza Angajat si Genereaza PDF" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_nav_home"
+        android:title="Acasă" />
+    <item
+        android:id="@+id/nav_projects"
+        android:icon="@drawable/ic_nav_projects"
+        android:title="Lucrări" />
+    <item
+        android:id="@+id/nav_invoices"
+        android:icon="@drawable/ic_nav_invoices"
+        android:title="Facturi" />
+    <item
+        android:id="@+id/nav_reports"
+        android:icon="@drawable/ic_nav_reports"
+        android:title="Rapoarte" />
+</menu>

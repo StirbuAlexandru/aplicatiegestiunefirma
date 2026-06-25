@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">aplicatie gestiune firma</string>
+    <string-array name="payment_types">
+        <item>La oră (Hourly)</item>
+        <item>La zi (Daily)</item>
+        <item>Salariu Fix (Monthly)</item>
+    </string-array>
+</resources>
