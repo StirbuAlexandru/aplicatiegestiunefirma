@@ -36,7 +36,11 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
         holder.tvEmployee.setText("Angajat: " + current.getEmployeeName());
         holder.tvProject.setText("Proiect: " + current.getProjectName());
         holder.tvDesc.setText(current.getReportText());
-        holder.tvHours.setText("Ore: " + current.getHoursWorked());
+        double h = current.getHoursWorked();
+        String hoursLabel = (h == Math.floor(h))
+                ? (int) h + "h"
+                : String.format(java.util.Locale.getDefault(), "%.1fh", h);
+        holder.tvHours.setText(hoursLabel);
 
         if (current.hasPhoto()) {
             holder.tvViewPhoto.setVisibility(View.VISIBLE);

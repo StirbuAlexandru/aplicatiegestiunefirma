@@ -35,11 +35,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="8h"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 android:fontFamily="sans-serif-medium"
-                android:textColor="@color/primary_blue"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="3dp"
+                android:textColor="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
                 android:background="@drawable/bg_pill_blue" />
         </LinearLayout>
 

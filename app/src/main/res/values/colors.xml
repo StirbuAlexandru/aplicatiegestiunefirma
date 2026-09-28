@@ -3,24 +3,24 @@
     <color name="black">#FF0F0F0F</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- 2026 Modern Palette — Indigo / Violet accent -->
-    <color name="primary_blue">#6366F1</color>
-    <color name="primary_deep">#4F46E5</color>
-    <color name="primary_light">#818CF8</color>
-    <color name="primary_surface">#EEF2FF</color>
+    <!-- WebliftDigital Purple Palette -->
+    <color name="primary_blue">#6B5CE7</color>
+    <color name="primary_deep">#5048C8</color>
+    <color name="primary_light">#8B7CF0</color>
+    <color name="primary_surface">#F0EEFB</color>
     <color name="accent_gold">#F59E0B</color>
     <color name="accent_teal">#14B8A6</color>
     <color name="accent_rose">#F43F5E</color>
 
     <!-- Soft card tints -->
-    <color name="card_blue">#EEF2FF</color>
+    <color name="card_blue">#F0EEFB</color>
     <color name="card_green">#ECFDF5</color>
     <color name="card_orange">#FFF7ED</color>
     <color name="card_purple">#FAF5FF</color>
     <color name="card_rose">#FFF1F2</color>
 
     <!-- Semantic icon colors -->
-    <color name="icon_blue">#6366F1</color>
+    <color name="icon_blue">#6B5CE7</color>
     <color name="icon_green">#10B981</color>
     <color name="icon_orange">#F97316</color>
     <color name="icon_purple">#A855F7</color>
@@ -31,18 +31,18 @@
     <color name="accent_orange">#F97316</color>
 
     <!-- Surfaces -->
-    <color name="bg_premium">#F8FAFC</color>
+    <color name="bg_premium">#F5F6FA</color>
     <color name="bg_surface">#FFFFFF</color>
     <color name="bg_elevated">#FFFFFF</color>
 
     <!-- Text -->
-    <color name="text_main">#1E293B</color>
+    <color name="text_main">#1A1A2E</color>
     <color name="text_secondary">#64748B</color>
-    <color name="text_hint">#94A3B8</color>
+    <color name="text_hint">#9AA5B4</color>
 
     <!-- Borders -->
-    <color name="divider_color">#E2E8F0</color>
-    <color name="border_subtle">#F1F5F9</color>
+    <color name="divider_color">#E8E8F0</color>
+    <color name="border_subtle">#EDEDF5</color>
 
     <!-- Status -->
     <color name="success">#10B981</color>
@@ -50,8 +50,8 @@
     <color name="error">#EF4444</color>
     <color name="info">#3B82F6</color>
 
-    <!-- Gradient start/end for header -->
-    <color name="gradient_start">#6366F1</color>
-    <color name="gradient_mid">#8B5CF6</color>
-    <color name="gradient_end">#A78BFA</color>
+    <!-- Gradient header -->
+    <color name="gradient_start">#4B3DC8</color>
+    <color name="gradient_mid">#6B5CE7</color>
+    <color name="gradient_end">#9B7DF0</color>
 </resources>

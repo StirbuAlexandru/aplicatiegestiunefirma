@@ -201,9 +201,27 @@ public class PayrollActivity extends AppCompatActivity {
                                 "%.1f ore x %.2f RON/h", hours, e.getPaymentRate());
                     }
                 } else if ("DAILY".equals(e.getPaymentType())) {
-                    totalPerEmp = daysWorked * e.getPaymentRate();
-                    details = String.format(Locale.getDefault(),
-                            "%d zile x %.2f RON/zi", daysWorked, e.getPaymentRate());
+                    Map<String, Double> dailyHoursPerEmp = new HashMap<>();
+                    for (DailyReport r : monthReports) {
+                        if (r.getEmployeeId() == e.getId()) {
+                            dailyHoursPerEmp.put(r.getDate(),
+                                    dailyHoursPerEmp.getOrDefault(r.getDate(), 0.0) + r.getHoursWorked());
+                        }
+                    }
+                    int fullDays = 0, halfDays = 0;
+                    for (double dayH : dailyHoursPerEmp.values()) {
+                        if (dayH >= 6.0) fullDays++;
+                        else halfDays++;
+                    }
+                    totalPerEmp = fullDays * e.getPaymentRate() + halfDays * (e.getPaymentRate() / 2.0);
+                    if (halfDays > 0) {
+                        details = String.format(Locale.getDefault(),
+                                "%d zile întregi + %d zile scurte (<6h) x %.2f RON/zi",
+                                fullDays, halfDays, e.getPaymentRate());
+                    } else {
+                        details = String.format(Locale.getDefault(),
+                                "%d zile x %.2f RON/zi", fullDays, e.getPaymentRate());
+                    }
                 } else if ("FIXED".equals(e.getPaymentType())) {
                     if (daysWorked > 0) {
                         totalPerEmp = e.getPaymentRate();

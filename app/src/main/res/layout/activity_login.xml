@@ -14,31 +14,22 @@
         android:background="@drawable/bg_gradient_login"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- App icon placeholder -->
-    <com.google.android.material.card.MaterialCardView
+    <!-- Logo WebliftDigital -->
+    <ImageView
         android:id="@+id/cardLogo"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="72dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp"
-        app:cardBackgroundColor="@color/white"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="56dp"
+        android:src="@drawable/logo_weblift"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_company"
-            app:tint="@color/primary_blue" />
-    </com.google.android.material.card.MaterialCardView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvLoginTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
         android:text="Gestiune Firmă"
         android:textColor="@color/white"
         android:textSize="28sp"
@@ -66,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="295dp"
         app:cardCornerRadius="28dp"
         app:cardElevation="12dp"
         app:cardBackgroundColor="@color/white"

@@ -27,8 +27,10 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -42,12 +44,14 @@ public class EmployeePortalActivity extends AppCompatActivity {
     private RecyclerView rvReports;
     private ReportAdapter adapter;
     private TextView tvWelcome, tvPosition, tvHoursMonth, tvReportsMonth, tvNoReports;
+    private TextView tvEstimatedSalary, tvSalaryDetails;
     private ExtendedFloatingActionButton fabAdd;
 
     private int employeeId;
     private String employeeName = "";
     private List<Project> projectList = new ArrayList<>();
     private List<DailyReport> myReports = new ArrayList<>();
+    private Employee currentEmployee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,8 @@ public class EmployeePortalActivity extends AppCompatActivity {
         tvHoursMonth = findViewById(R.id.tvHoursMonth);
         tvReportsMonth = findViewById(R.id.tvReportsMonth);
         tvNoReports = findViewById(R.id.tvNoReports);
+        tvEstimatedSalary = findViewById(R.id.tvEstimatedSalary);
+        tvSalaryDetails = findViewById(R.id.tvSalaryDetails);
         fabAdd = findViewById(R.id.fabAddReport);
         rvReports = findViewById(R.id.rvEmployeeReports);
 
@@ -114,10 +120,12 @@ public class EmployeePortalActivity extends AppCompatActivity {
             public void onResponse(Call<Employee> call, Response<Employee> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Employee emp = response.body();
+                    currentEmployee = emp;
                     employeeName = emp.getFirstName() + " " + emp.getLastName();
                     runOnUiThread(() -> {
                         tvWelcome.setText("Bun\u0103 ziua, " + emp.getFirstName() + "!");
                         tvPosition.setText(emp.getPosition() != null ? emp.getPosition() : "Angajat");
+                        updateEstimatedSalary();
                     });
                 }
             }
@@ -127,15 +135,85 @@ public class EmployeePortalActivity extends AppCompatActivity {
                 new Thread(() -> {
                     Employee emp = db.employeeDao().getEmployeeById(employeeId);
                     if (emp != null) {
+                        currentEmployee = emp;
                         employeeName = emp.getFirstName() + " " + emp.getLastName();
                         runOnUiThread(() -> {
                             tvWelcome.setText("Bun\u0103 ziua, " + emp.getFirstName() + "!");
                             tvPosition.setText(emp.getPosition() != null ? emp.getPosition() : "Angajat");
+                            updateEstimatedSalary();
                         });
                     }
                 }).start();
             }
         });
+    }
+
+    /** Calculeaza salariul estimat pe luna curenta, cu aceeasi formula ca PayrollActivity (admin). */
+    private void updateEstimatedSalary() {
+        if (currentEmployee == null || tvEstimatedSalary == null) return;
+
+        String currentMonth = new SimpleDateFormat("yyyy-MM", Locale.getDefault())
+                .format(Calendar.getInstance().getTime());
+
+        Map<String, Double> dailyHours = new HashMap<>();
+        int daysWorked = 0;
+        for (DailyReport r : myReports) {
+            if (r.getDate() != null && r.getDate().startsWith(currentMonth)) {
+                dailyHours.put(r.getDate(), dailyHours.getOrDefault(r.getDate(), 0.0) + r.getHoursWorked());
+            }
+        }
+        daysWorked = dailyHours.size();
+
+        double total = 0;
+        String details = "";
+        String paymentType = currentEmployee.getPaymentType();
+        double rate = currentEmployee.getPaymentRate();
+
+        if ("HOURLY".equals(paymentType)) {
+            double regularHours = 0, overtimeHours = 0;
+            for (double dayH : dailyHours.values()) {
+                if (dayH > 8.0) {
+                    regularHours += 8.0;
+                    overtimeHours += dayH - 8.0;
+                } else {
+                    regularHours += dayH;
+                }
+            }
+            double regularPay = regularHours * rate;
+            double overtimePay = overtimeHours * rate * 1.5;
+            total = regularPay + overtimePay;
+            if (overtimeHours > 0) {
+                details = String.format(Locale.getDefault(),
+                        "%.1f ore normale + %.1f ore extra (1.5x) x %.2f RON/h",
+                        regularHours, overtimeHours, rate);
+            } else {
+                details = String.format(Locale.getDefault(), "%.1f ore x %.2f RON/h", regularHours, rate);
+            }
+        } else if ("DAILY".equals(paymentType)) {
+            int fullDays = 0, halfDays = 0;
+            for (double dayH : dailyHours.values()) {
+                if (dayH >= 6.0) fullDays++;
+                else halfDays++;
+            }
+            total = fullDays * rate + halfDays * (rate / 2.0);
+            if (halfDays > 0) {
+                details = String.format(Locale.getDefault(),
+                        "%d zile întregi + %d zile scurte (<6h) x %.2f RON/zi",
+                        fullDays, halfDays, rate);
+            } else {
+                details = String.format(Locale.getDefault(), "%d zile x %.2f RON/zi", fullDays, rate);
+            }
+        } else if ("FIXED".equals(paymentType)) {
+            if (daysWorked > 0) {
+                total = rate;
+                details = "Salariu lunar fix";
+            } else {
+                details = "Niciun raport trimis luna asta";
+            }
+        }
+
+        tvEstimatedSalary.setText(String.format(Locale.getDefault(), "%.2f RON", total));
+        tvSalaryDetails.setText(details);
     }
 
     private void loadProjectsForSelection() {
@@ -205,6 +283,7 @@ public class EmployeePortalActivity extends AppCompatActivity {
         final int finalCount = reportCount;
         tvHoursMonth.setText(String.format(Locale.getDefault(), "%.0f", finalHours));
         tvReportsMonth.setText(String.valueOf(finalCount));
+        updateEstimatedSalary();
     }
 
     private void showAddReportDialog() {
