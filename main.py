@@ -377,7 +377,7 @@ def login(req: LoginRequest):
             "access_token": token,
             "token_type": "bearer",
             "firma_id": user[1],
-            "role": user[2] if user[2] else "admin",
+            "role": user[2] if user[2] else "employee",
             "employee_id": user[3]
         }
     except HTTPException:
