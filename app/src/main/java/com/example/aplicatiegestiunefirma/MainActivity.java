@@ -310,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     Company server = response.body();
                     runOnUiThread(() -> {
-                        tvWelcome.setText("Bună, " + server.getName() + "!");
+                        tvWelcome.setText(getGreeting() + ", " + server.getName() + "!");
                         ivSyncStatus.setImageResource(android.R.drawable.presence_online);
                     });
                     if (server.getName() != null && !server.getName().isEmpty()) {
@@ -337,11 +337,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private String getGreeting() {
+        int ora = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+            if(ora<12){
+                return "Bună dimineața";
+            } else if (12<=ora && ora<18){
+                return "Bună ziua";
+            } else {
+                return "Bună seara";
+        }
+   }
+   
     private void loadLocalCompanyName() {
         new Thread(() -> {
             List<Company> companies = db.companyDao().getAllCompaniesDirect();
             if (!companies.isEmpty()) {
-                runOnUiThread(() -> tvWelcome.setText("Bună, " + companies.get(0).getName() + "!"));
+                runOnUiThread(() -> tvWelcome.setText(getGreeting() + ", " + companies.get(0).getName() + "!"));
             }
         }).start();
     }
