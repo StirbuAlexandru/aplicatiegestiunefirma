@@ -23,3 +23,8 @@ __pycache__/
 google-services (1).json
 /app/build
 
+
+# Secrets / environment
+.env
+.env.*
+app/google-services.json
